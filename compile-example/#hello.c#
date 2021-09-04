@@ -1,0 +1,22 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "name.h"
+
+int main(void) {
+  printfHello ok %s\n", getMyName());
+  return EXIT_SUCCESS;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
