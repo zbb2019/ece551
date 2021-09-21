@@ -1,0 +1,6 @@
+line# descriptions
+  return dangling pointer
+  use of dangling pointer
+  index out of bounds
+  use of uninitialized value
+
