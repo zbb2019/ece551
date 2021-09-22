@@ -5,6 +5,9 @@
 void reverse(char * str) {
   //WRITE ME!
 
+  if (str == NULL) {
+    return;
+  }
   // find the 1st "\0" in the string, and assign a pointer to it
   char * nullTerminatorPtr = strchr(str, '\0');
   // if the first char of string is "\0", then it's an empty string
@@ -35,6 +38,7 @@ int main(void) {
   char str5[] = "You can be my wingman anyday!";
   char str6[] = "Executor Selendis! Unleash the full power of your forces! There may be "
                 "no tomorrow!";
+
   char * array[] = {str0, str1, str2, str3, str4, str5, str6};
   for (int i = 0; i < 7; i++) {
     reverse(array[i]);
