@@ -2,8 +2,8 @@ B
 C
 B
 D
-A
-F
+C
+B
 D
 D
 F
