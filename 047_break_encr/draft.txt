@@ -1,0 +1,80 @@
+ switch (c) {
+        case 'a':
+          freqArray[0] += 1;
+          break;
+        case 'b':
+          freqArray[0] += 1;
+          break;
+        case 'c':
+          freqArray[0] += 1;
+          break;
+        case 'd':
+          freqArray[0] += 1;
+          break;
+        case 'e':
+          freqArray[0] += 1;
+          break;
+        case 'f':
+          freqArray[0] += 1;
+          break;
+        case 'g':
+          freqArray[0] += 1;
+          break;
+        case 'h':
+          freqArray[0] += 1;
+          break;
+        case 'i':
+          freqArray[0] += 1;
+          break;
+        case 'j':
+          freqArray[0] += 1;
+          break;
+        case 'k':
+          freqArray[0] += 1;
+          break;
+        case 'l':
+          freqArray[0] += 1;
+          break;
+        case 'm':
+          freqArray[0] += 1;
+          break;
+        case 'n':
+          freqArray[0] += 1;
+          break;
+        case 'o':
+          freqArray[0] += 1;
+          break;
+        case 'p':
+          freqArray[0] += 1;
+          break;
+        case 'q':
+          freqArray[0] += 1;
+          break;
+        case 'r':
+          freqArray[0] += 1;
+          break;
+        case 's':
+          freqArray[0] += 1;
+          break;
+        case 't':
+          freqArray[0] += 1;
+          break;
+        case 'u':
+          freqArray[0] += 1;
+          break;
+        case 'v':
+          freqArray[0] += 1;
+          break;
+        case 'w':
+          freqArray[0] += 1;
+          break;
+        case 'x':
+          freqArray[0] += 1;
+          break;
+        case 'y':
+          freqArray[0] += 1;
+          break;
+        case 'z':
+          freqArray[0] += 1;
+          break;
+      }
