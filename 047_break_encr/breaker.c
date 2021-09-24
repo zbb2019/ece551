@@ -20,12 +20,14 @@ void frequencyCount(int * freqArray, size_t n, FILE * f) {
 
 int maxNumInArray(int * freqArray, size_t n) {
   int currentMax = freqArray[0];
+  int currentMaxIndex = 0;
   for (size_t i = 1; i < n; i++) {
-    if (freqArray[i] > currentMax) {
+    if (freqArray[i] > currentMax) {  //what if ==, what if 2 number ties?
       currentMax = freqArray[i];
+      currentMaxIndex = i;
     }
   }
-  return currentMax;
+  return currentMaxIndex;
 }
 
 int solveEncryptionKey(int indexForE) {
@@ -63,7 +65,6 @@ int main(int argc, char ** argv) {
   int key = solveEncryptionKey(indexForE);
   if ((key != -999) && (key >= 0) && (key < 26)) {
     fprintf(stdout, "%d\n", key);
-    printf("%d\n", key);
     return EXIT_SUCCESS;
   }
   else {
