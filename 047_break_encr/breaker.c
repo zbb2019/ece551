@@ -67,8 +67,10 @@ int main(int argc, char ** argv) {
     return EXIT_SUCCESS;
   }
   else {
-    fprintf(stderr, "Failed on solving the encryption key :<\n");
-    printf("Failed on solving the encryption key :<\n");
+    fprintf(stderr,
+            "Failed on solving the encryption key :<\n"
+            "We got (key): %d\n",
+            key);
     return EXIT_FAILURE;
   }
 }
