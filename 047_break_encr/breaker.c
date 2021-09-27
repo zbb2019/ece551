@@ -12,6 +12,8 @@ void frequencyCount(int * freqArray, size_t n, FILE * f) {
   while ((c = fgetc(f)) != EOF) {
     if (isalpha(c)) {
       // use freqArray[0] for 'a', so use freqArray[c-'a'] for c
+      // Note: Don't need to consider the possibility of getting Cap-case letter,
+      // because encrypt.c makes its result into all lower-case
       freqArray[c - 'a'] += 1;
     }
   }
@@ -33,19 +35,22 @@ int maxNumInArray(int * freqArray, size_t n) {
 int solveEncryptionKey(int indexForE) {
   int letterForE = indexForE + 'a';
   int key;
-  // condition 1: letterForE = 'e' + key
+
+  // Solve key:
+  // Consider letterForE to be only lower-case letters ['a', 'z'],
+  // because of the results from encrypt.c and the requirement for breaker.c
   key = letterForE - 'e';
-  if ('e' <= (123 - key)) {
+
+  // confition 2: letterForE is between ['a'(ASCII = 97), 'd'(ASCII = 100)], key < 0
+  if (key < 0) {
+    key += 26;
     return key;
   }
-  // confition 2: letterForE = ('e' - 97 + key)%26 + 97
-  key = key + 26;
-  if ('e' > (123 - key)) {
+  // condition 1: letterForE is between ['e'(ASCII = 101), 'z'(ASCII = 122)], key = [0, 26)
+  else {
     return key;
   }
-  return -999;
 }
-int test();
 
 int main(int argc, char ** argv) {
   if (argc != 2) {
