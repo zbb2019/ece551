@@ -10,6 +10,14 @@ country_t parseLine(char * line) {
   ans.population = 0;
 
   //MY ANSWER BELOW
+  // check input errors
+  if (line == NULL) {
+    printf("Error in the input file, processing stopped:\n"
+           "\tchar * line points to NULL:\n"
+           "\t%s\n",
+           line);
+    exit(EXIT_FAILURE);
+  }
   char * lineCopy = line;
   //cite man strchr() - char *strchr(const char *s, int c);
   char * comma = strchr(line, ',');
@@ -55,7 +63,9 @@ country_t parseLine(char * line) {
 
 void calcRunningAvg(unsigned * data, size_t n_days, double * avg) {
   //WRITE ME
-  if (n_days <= 0) {
+  // check input errors
+  if (n_days <= 0 || data == NULL) {
+    printf("Error: data is empty\n");
     return;
   }
   double sum;
@@ -70,6 +80,17 @@ void calcRunningAvg(unsigned * data, size_t n_days, double * avg) {
 
 void calcCumulative(unsigned * data, size_t n_days, uint64_t pop, double * cum) {
   //WRITE ME
+  // check input errors
+  if (n_days <= 0 || data == NULL) {
+    printf("Error: data is empty\n");
+    return;
+  }
+
+  double sum = 0;
+  for (size_t i = 0; i < n_days; i++) {
+    sum += data[i];
+    cum[i] = sum / pop * 100000;
+  }
 }
 
 void printCountryWithMax(country_t * countries,
