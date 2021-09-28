@@ -1,8 +1,12 @@
 #error
 printCountries invalid_population.csv
-
+printCountries invalid_pop1_noComma.csv
+printCountries invalid_pop2_notNum.csv
 
 #success
 printCountries population.csv
-printcountries valid_pop_2commas.csv
+printCountries valid_pop_2commas.csv
+printRunningAvg population.csv daily_cases.csv
+printCumulative population.csv daily_cases.csv
 printDailyMax population.csv daily_cases.csv
+
