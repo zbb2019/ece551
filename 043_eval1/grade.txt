@@ -1,7 +1,18 @@
-Grading at 09/28/2021:06:42:29.004385
-For commit ID 93885397550a4227e3ff4c3a7b520cec44002806
-Grading at Tue Sep 28 02:42:28 EDT 2021
+Grading at 09/28/2021:07:17:38.302976
+For commit ID 5bccba3520f727d8d2d507e60f43bc10d13cbf98
+Grading at Tue Sep 28 03:17:36 EDT 2021
 Running your test cases
-Cannot proceed without testcases.txt
+
+Compiling printCountries
+rm -f *~ printCountries printRunningAvg printCumulative printDailyMax
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printCountries.o -o printCountries
++-----------------------------------------------------------------------+
+Test case printCountries invalid_population.csv
+Your program successfully indicated a failure case
++-----------------------------------------------------------------------+
+Test case printCountries population.csv
+Your file matched the expected output
+Program must be one of printCountries printRunningAvg printCumulative printDailyMax
+But found "printcountries"
 
 Overall Grade: NO GRADE YET
