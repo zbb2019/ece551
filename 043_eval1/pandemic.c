@@ -66,7 +66,7 @@ void calcRunningAvg(unsigned * data, size_t n_days, double * avg) {
   // check input errors
   if (n_days <= 0 || data == NULL) {
     printf("Error: data is empty\n");
-    return;
+    exit(EXIT_FAILURE);
   }
   double sum;
   for (size_t i = 0; i < (n_days - 6); i++) {
@@ -83,7 +83,7 @@ void calcCumulative(unsigned * data, size_t n_days, uint64_t pop, double * cum) 
   // check input errors
   if (n_days <= 0 || data == NULL) {
     printf("Error: data is empty\n");
-    return;
+    exit(EXIT_FAILURE);
   }
 
   double sum = 0;
@@ -101,7 +101,7 @@ void printCountryWithMax(country_t * countries,
   // check input errors
   if (n_days <= 0 || n_countries <= 0 || data == NULL) {
     printf("Error: data is empty\n");
-    return;
+    exit(EXIT_FAILURE);
   }
 
   size_t maxCountryIndex = 0;

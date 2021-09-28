@@ -1,0 +1,8 @@
+#error
+printCountries invalid_population.csv
+
+
+#success
+printCountries population.csv
+printcountries valid_pop_2commas.csv
+printDailyMax population.csv daily_cases.csv
