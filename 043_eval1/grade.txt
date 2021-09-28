@@ -1,6 +1,6 @@
-Grading at 09/28/2021:07:23:33.229163
-For commit ID 7c319ef5a4e4f527eb7ea036ea1f84fcdfb8f268
-Grading at Tue Sep 28 03:23:28 EDT 2021
+Grading at 09/28/2021:08:09:43.585348
+For commit ID 9d170bf0f64533d1be9f338c0509d57b88db6a26
+Grading at Tue Sep 28 04:09:36 EDT 2021
 Running your test cases
 
 Compiling printCountries
@@ -11,15 +11,24 @@ Test case printCountries invalid_population.csv
 Your program successfully indicated a failure case
 +-----------------------------------------------------------------------+
 Test case printCountries invalid_pop1_noComma.csv
-Our printCountries does not consider this an error case
+Error in the input file, processing stopped:
+	No comma detected in this input line:
+	randomCounrty 12345
+Your program did not indicate a failure case
 +-----------------------------------------------------------------------+
 Test case printCountries invalid_pop2_notNum.csv
-Our printCountries does not consider this an error case
+Error in the input file, processing stopped:
+	The first char detected after comma is not a number, in this input line:
+	random, a^^as12345
+Your program did not indicate a failure case
 +-----------------------------------------------------------------------+
 Test case printCountries population.csv
 Your file matched the expected output
 +-----------------------------------------------------------------------+
 Test case printCountries valid_pop_2commas.csv
+Your file matched the expected output
++-----------------------------------------------------------------------+
+Test case printCountries valid_pop2_negpopnum.csv
 Your file matched the expected output
 
 Compiling printRunningAvg
