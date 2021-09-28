@@ -98,4 +98,42 @@ void printCountryWithMax(country_t * countries,
                          unsigned ** data,
                          size_t n_days) {
   //WRITE ME
+  // check input errors
+  if (n_days <= 0 || n_countries <= 0 || data == NULL) {
+    printf("Error: data is empty\n");
+    return;
+  }
+
+  size_t maxCountryIndex = 0;
+  unsigned maxNumber_cases = data[0][0];
+  int tie = 0;
+  for (size_t country = 0; country < n_countries; country++) {
+    for (size_t day = 0; day < n_days; day++) {
+      // already counted data[0][0]
+      if ((country == 0) && (day == 0)) {
+        continue;
+      }
+
+      // iterating over the rest of the matrix
+      if (data[country][day] > maxNumber_cases) {
+        maxCountryIndex = country;
+        maxNumber_cases = data[country][day];
+        tie = 0;
+      }
+      else if (data[country][day] == maxNumber_cases) {
+        tie = 1;
+      }
+      else {  // data[country][day] < maxNumber_cases
+        continue;
+      }
+    }
+  }
+
+  if (tie == 1) {
+    printf("There is a tie between at least two countries\n");
+  }
+  else {
+    country_t maxCountry = countries[maxCountryIndex];
+    printf("%s has the most daily cases with %u\n", maxCountry.name, maxNumber_cases);
+  }
 }
