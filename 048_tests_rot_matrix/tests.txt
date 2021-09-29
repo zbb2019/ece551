@@ -11,3 +11,7 @@ ip10_space.txt
 ip11_randomSpace.txt
 ip12_mess.txt
 ip13_basic1.txt
+
+non_existing_file.txt
+ip1_9x9.txt ip2_11x11.txt
+ip14_EOF.txt
