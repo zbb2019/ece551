@@ -1,6 +1,6 @@
-Grading at 09/29/2021:02:22:31.766448
-For commit ID 4165583354d89eebee6309ac58380459d4972308
-Grading at Tue Sep 28 22:22:23 EDT 2021
+Grading at 09/29/2021:03:01:28.261146
+For commit ID 6e98f0b340b9ebc9ddd29e9c19c10b79a503dfd4
+Grading at Tue Sep 28 23:01:20 EDT 2021
 Running your test cases
 
 Compiling printCountries
@@ -11,22 +11,13 @@ Test case printCountries invalid_population.csv
 Your program successfully indicated a failure case
 +-----------------------------------------------------------------------+
 Test case printCountries invalid_pop1_noComma.csv
-Error in the input file, processing stopped:
-	No comma detected in this input line:
-	randomCounrty 12345
-Your program did not indicate a failure case
+Your program successfully indicated a failure case
 +-----------------------------------------------------------------------+
 Test case printCountries invalid_pop2_notNum.csv
-Error in the input file, processing stopped:
-	The first char detected after comma is not a number, in this input line:
-	random, a^^as12345
-Your program did not indicate a failure case
+Your program successfully indicated a failure case
 +-----------------------------------------------------------------------+
 Test case printCountries invalid_pop3_nonNegStartWith-.csv
-Error in the input file, processing stopped:
-	The first char detected after comma is not a number, in this input line:
-	aCountry, --1
-Your program did not indicate a failure case
+Your program successfully indicated a failure case
 +-----------------------------------------------------------------------+
 Test case printCountries population.csv
 Your file matched the expected output
@@ -61,7 +52,7 @@ gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printDailyMax.o -o prin
 Test case printDailyMax population.csv daily_cases.csv
 Your file matched the expected output
 
-You have FAILED one or more of your test cases
-Keep debugging
+You have PASSED all of your test cases
+Keep adding test cases until you are satisfied your program is correct
 
 Overall Grade: NO GRADE YET
