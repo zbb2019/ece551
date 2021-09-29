@@ -1,6 +1,6 @@
-Grading at 09/28/2021:08:22:09.115108
-For commit ID 2a4111c16617f5f67030f019e1e07caf3b2179fc
-Grading at Tue Sep 28 04:22:01 EDT 2021
+Grading at 09/29/2021:02:22:31.766448
+For commit ID 4165583354d89eebee6309ac58380459d4972308
+Grading at Tue Sep 28 22:22:23 EDT 2021
 Running your test cases
 
 Compiling printCountries
@@ -22,6 +22,12 @@ Error in the input file, processing stopped:
 	random, a^^as12345
 Your program did not indicate a failure case
 +-----------------------------------------------------------------------+
+Test case printCountries invalid_pop3_nonNegStartWith-.csv
+Error in the input file, processing stopped:
+	The first char detected after comma is not a number, in this input line:
+	aCountry, --1
+Your program did not indicate a failure case
++-----------------------------------------------------------------------+
 Test case printCountries population.csv
 Your file matched the expected output
 +-----------------------------------------------------------------------+
@@ -29,10 +35,7 @@ Test case printCountries valid_pop1_2Commas.csv
 Your file matched the expected output
 +-----------------------------------------------------------------------+
 Test case printCountries valid_pop2_negPopNum.csv
-Line_1_did_not_match
-Line_2_did_not_match
-Line_3_did_not_match
-Your file did not match the expected output
+Your file matched the expected output
 +-----------------------------------------------------------------------+
 Test case printCountries valid_pop3_specialName.csv
 Your file matched the expected output
