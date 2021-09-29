@@ -48,6 +48,9 @@ country_t parseLine(char * line) {
     lineCopy++;
   }
   char x = *lineCopy;
+  if (x == '-') {
+    x = *(lineCopy + 1);
+  }
   if (!((x == '1') || (x == '2') || (x == '3') || (x == '4') || (x == '5') ||
         (x == '6') || (x == '7') || (x == '8') || (x == '9') || (x == '0'))) {
     printf("Error in the input file, processing stopped:\n"

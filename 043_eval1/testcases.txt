@@ -2,6 +2,7 @@
 printCountries invalid_population.csv
 printCountries invalid_pop1_noComma.csv
 printCountries invalid_pop2_notNum.csv
+printCountries invalid_pop3_nonNegStartWith-.csv
 
 #success
 printCountries population.csv
