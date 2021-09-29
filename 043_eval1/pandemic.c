@@ -96,9 +96,12 @@ void calcRunningAvg(unsigned * data, size_t n_days, double * avg) {
      */
 
   // check input errors
-  if (n_days < 7 || data == NULL) {
+  if (data == NULL) {
     fprintf(stderr, "Error: data is empty or less than 7-day\n");
     exit(EXIT_FAILURE);
+  }
+  else if (n_days < 7) {
+    return;
   }
 
   // calculate the result
@@ -126,9 +129,12 @@ void calcCumulative(unsigned * data, size_t n_days, uint64_t pop, double * cum) 
      */
 
   // check input errors
-  if (n_days <= 0 || data == NULL) {
+  if (data == NULL) {
     fprintf(stderr, "Error: data is empty\n");
     exit(EXIT_FAILURE);
+  }
+  else if (n_days <= 0) {
+    return;
   }
 
   // calculate the result
@@ -160,9 +166,12 @@ void printCountryWithMax(country_t * countries,
      */
 
   // check input errors
-  if (n_days <= 0 || n_countries <= 0 || data == NULL) {
+  if (data == NULL) {
     fprintf(stderr, "Error: data is empty\n");
     exit(EXIT_FAILURE);
+  }
+  else if (n_days <= 0 || n_countries <= 0) {
+    return;
   }
 
   // find the maximum number (of daily cases) and that country
