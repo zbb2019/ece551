@@ -16,7 +16,7 @@ printCountries valid_pop2_negPopNum.csv
 printCountries valid_pop3_specialName.csv
 
 printRunningAvg population.csv my3_daily_7.csv
-printRunningavg population.csv my1_daily_all0s.csv
+printRunningAvg population.csv my1_daily_all0s.csv
 
 printCumulative population.csv my2_daily_1.csv
 printCumulative population.csv my1_daily_all0s.csv
