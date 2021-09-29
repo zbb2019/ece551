@@ -12,10 +12,11 @@ country_t parseLine(char * line) {
   //MY ANSWER BELOW
   // check input errors
   if (line == NULL) {
-    printf("Error in the input file, processing stopped:\n"
-           "\tchar * line points to NULL:\n"
-           "\t%s\n",
-           line);
+    fprintf(stderr,
+            "Error in the input file, processing stopped:\n"
+            "\tchar * line points to NULL:\n"
+            "\t%s\n",
+            line);
     exit(EXIT_FAILURE);
   }
   char * lineCopy = line;
@@ -24,10 +25,11 @@ country_t parseLine(char * line) {
 
   // check input errors
   if (comma == NULL) {
-    printf("Error in the input file, processing stopped:\n"
-           "\tNo comma detected in this input line:\n"
-           "\t%s\n",
-           line);
+    fprintf(stderr,
+            "Error in the input file, processing stopped:\n"
+            "\tNo comma detected in this input line:\n"
+            "\t%s\n",
+            line);
     exit(EXIT_FAILURE);
   }
 
@@ -53,10 +55,11 @@ country_t parseLine(char * line) {
   }
   if (!((x == '1') || (x == '2') || (x == '3') || (x == '4') || (x == '5') ||
         (x == '6') || (x == '7') || (x == '8') || (x == '9') || (x == '0'))) {
-    printf("Error in the input file, processing stopped:\n"
-           "\tThe first char detected after comma is not a number, in this input line:\n"
-           "\t%s\n",
-           line);
+    fprintf(stderr,
+            "Error in the input file, processing stopped:\n"
+            "\tThe first char detected after comma is not a number, in this input line:\n"
+            "\t%s\n",
+            line);
     exit(EXIT_FAILURE);
   }
   // cite man strtol() - long int strtol(const char *nptr, char **endptr, int base);
@@ -67,8 +70,8 @@ country_t parseLine(char * line) {
 void calcRunningAvg(unsigned * data, size_t n_days, double * avg) {
   //WRITE ME
   // check input errors
-  if (n_days <= 0 || data == NULL) {
-    printf("Error: data is empty\n");
+  if (n_days < 7 || data == NULL) {
+    fprintf(stderr, "Error: data is empty\n");
     exit(EXIT_FAILURE);
   }
   double sum;
@@ -85,7 +88,7 @@ void calcCumulative(unsigned * data, size_t n_days, uint64_t pop, double * cum) 
   //WRITE ME
   // check input errors
   if (n_days <= 0 || data == NULL) {
-    printf("Error: data is empty\n");
+    fprintf(stderr, "Error: data is empty\n");
     exit(EXIT_FAILURE);
   }
 
@@ -103,7 +106,7 @@ void printCountryWithMax(country_t * countries,
   //WRITE ME
   // check input errors
   if (n_days <= 0 || n_countries <= 0 || data == NULL) {
-    printf("Error: data is empty\n");
+    fprintf(stderr, "Error: data is empty\n");
     exit(EXIT_FAILURE);
   }
 
