@@ -4,13 +4,26 @@
 #include <string.h>
 
 country_t parseLine(char * line) {
-  //WRITE ME
+  /* Step 1
+     Input:
+     1. a string (char * line) in the following format: 
+     "country's name, 12345", where 12345 is the population number     
+     
+     Return:
+     1. country_t ans (a struct which has array country_t.name 
+     and int country_t.population)
+     
+     Do:
+     Store the country's name and population number from the 
+     input string into country_t ans (which we will return afterwards)  
+     */
+
   country_t ans;
   ans.name[0] = '\0';
   ans.population = 0;
 
   //MY ANSWER BELOW
-  // check input errors
+  //1. check input error 1
   if (line == NULL) {
     fprintf(stderr,
             "Error in the input file, processing stopped:\n"
@@ -20,10 +33,10 @@ country_t parseLine(char * line) {
     exit(EXIT_FAILURE);
   }
   char * lineCopy = line;
-  //cite man strchr() - char *strchr(const char *s, int c);
-  char * comma = strchr(line, ',');
 
-  // check input errors
+  //2. check input error 2
+  // CITE the next line -  man strchr - char *strchr(const char *s, int c);
+  char * comma = strchr(line, ',');
   if (comma == NULL) {
     fprintf(stderr,
             "Error in the input file, processing stopped:\n"
@@ -33,7 +46,7 @@ country_t parseLine(char * line) {
     exit(EXIT_FAILURE);
   }
 
-  //1. filling country name[]
+  //3. filling country_t.name[]
   int i = 0;
   while (lineCopy < comma) {
     ans.name[i] = *lineCopy;
@@ -42,13 +55,13 @@ country_t parseLine(char * line) {
   }
   ans.name[i] = '\0';
 
-  // 2. filling population
+  //4. filling country_t.population
   lineCopy = comma + 1;
-
-  // check input errors
   while (*lineCopy == ' ') {
     lineCopy++;
   }
+
+  // check input error 3
   char x = *lineCopy;
   if (x == '-') {
     x = *(lineCopy + 1);
@@ -62,18 +75,33 @@ country_t parseLine(char * line) {
             line);
     exit(EXIT_FAILURE);
   }
-  // cite man strtol() - long int strtol(const char *nptr, char **endptr, int base);
+
+  // CITE the next line - man strtol - long int strtol(const char *nptr, char **endptr, int base);
   ans.population = strtol(lineCopy, NULL, 10);
+
+  //5. return country_t
   return ans;
 }
 
 void calcRunningAvg(unsigned * data, size_t n_days, double * avg) {
-  //WRITE ME
+  /* Step 2
+     Input:
+     1. unsigned* data - an array of daily case data
+     2. size_t n_days - the number of days over which data is measured
+     3. double * avg - where to write the result of the calculation
+
+     Return: void
+     
+     Do: Calculates the 7-day running average of daily case data
+     */
+
   // check input errors
   if (n_days < 7 || data == NULL) {
     fprintf(stderr, "Error: data is empty\n");
     exit(EXIT_FAILURE);
   }
+
+  // calculate the result
   double sum;
   for (size_t i = 0; i < (n_days - 6); i++) {
     sum = 0;
@@ -85,13 +113,25 @@ void calcRunningAvg(unsigned * data, size_t n_days, double * avg) {
 }
 
 void calcCumulative(unsigned * data, size_t n_days, uint64_t pop, double * cum) {
-  //WRITE ME
+  /* Step 3
+     Input:
+     1. unsigned* data - an array of daily case data
+     2. size_t n_days - the number of days over which data is measured
+     3. uint64_t pop - the population for that country
+     4. double * cum - where to write the result of the calculation
+
+     Return: void
+     
+     Do: Calculates the cumulative number of cases that day per 100,000 people.
+     */
+
   // check input errors
   if (n_days <= 0 || data == NULL) {
     fprintf(stderr, "Error: data is empty\n");
     exit(EXIT_FAILURE);
   }
 
+  // calculate the result
   double sum = 0;
   for (size_t i = 0; i < n_days; i++) {
     sum += data[i];
@@ -103,13 +143,29 @@ void printCountryWithMax(country_t * countries,
                          size_t n_countries,
                          unsigned ** data,
                          size_t n_days) {
-  //WRITE ME
+  /* Step 4
+     Input:
+     1. country_t * countries - an array of country_t's with length n_country 
+     2. size_t n_countries - the length of array "countries" 
+     3. unsigned* data - a 2-D array[n_countries][n_days] of daily case data, 
+     with each row representing each counrtry's data of n_days
+     4. size_t n_days - the number of days over which data is measured
+    
+     Return: void
+     
+     Do: 
+     Finds the maximum number of daily cases of all countries repsented in the data,
+     for any day over the entire time period. Then print the name of that country and
+     the max number of daily cases. If there's a tie, then print a message for tie.  
+     */
+
   // check input errors
   if (n_days <= 0 || n_countries <= 0 || data == NULL) {
     fprintf(stderr, "Error: data is empty\n");
     exit(EXIT_FAILURE);
   }
 
+  // find the maximum number (of daily cases) and that country
   size_t maxCountryIndex = 0;
   unsigned maxNumber_cases = data[0][0];
   int tie = 0;
@@ -135,6 +191,7 @@ void printCountryWithMax(country_t * countries,
     }
   }
 
+  // print the result
   if (tie == 1) {
     printf("There is a tie between at least two countries\n");
   }
