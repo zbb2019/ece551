@@ -3,13 +3,23 @@ printCountries invalid_population.csv
 printCountries invalid_pop1_noComma.csv
 printCountries invalid_pop2_notNum.csv
 printCountries invalid_pop3_nonNegStartWith-.csv
+printRunningAvg population.csv my4_daily_6.csv
 
 #success
 printCountries population.csv
-printCountries valid_pop1_2Commas.csv 
-printCountries valid_pop2_negPopNum.csv
-printCountries valid_pop3_specialName.csv
 printRunningAvg population.csv daily_cases.csv
 printCumulative population.csv daily_cases.csv
 printDailyMax population.csv daily_cases.csv
 
+printCountries valid_pop1_2Commas.csv 
+printCountries valid_pop2_negPopNum.csv
+printCountries valid_pop3_specialName.csv
+
+printRunningAvg population.csv my3_daily_7.csv
+printRunningavg population.csv my1_daily_all0s.csv
+
+printCumulative population.csv my2_daily_1.csv
+printCumulative population.csv my1_daily_all0s.csv
+
+printDailyMax population.csv my2_daily_1.csv
+printDailyMax population.csv my1_daily_all0s.csv 

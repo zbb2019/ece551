@@ -97,7 +97,7 @@ void calcRunningAvg(unsigned * data, size_t n_days, double * avg) {
 
   // check input errors
   if (n_days < 7 || data == NULL) {
-    fprintf(stderr, "Error: data is empty\n");
+    fprintf(stderr, "Error: data is empty or less than 7-day\n");
     exit(EXIT_FAILURE);
   }
 
