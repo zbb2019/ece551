@@ -87,14 +87,14 @@ int main(int argc, char ** argv) {
   // Address Error: empty/many argument
   if (argc != 2) {
     fprintf(stderr, "Error: Please passin exactly 1 inputFileName!\n");
-    return EXIT_FAILURE;
+    exit(EXIT_FAILURE);
   }
 
   FILE * f = fopen(argv[1], "r");
   // Address Error: file not exists
   if (f == NULL) {
     fprintf(stderr, "Error: Files does NOT exist!\n");
-    return EXIT_FAILURE;
+    exit(EXIT_FAILURE);
   }
 
   // store the matrix from the file into: int oldMatrix[10][10]
@@ -103,7 +103,7 @@ int main(int argc, char ** argv) {
       old[0], old[1], old[2], old[3], old[4], old[5], old[6], old[7], old[8], old[9]};
   readMatrix(f, oldMatrix);
   printf("Original 10x10 matrix:\n");
-  printMatrix(oldMatrix, SIZE, SIZE);
+  //  printMatrix(oldMatrix, SIZE, SIZE);
 
   // rotate the matrix and store it into: int newMatrix[10][10]
   int new[SIZE][SIZE] = {0};
