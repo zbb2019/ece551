@@ -6,6 +6,6 @@
 6 E
 7 C
 8 B
-9 B
-10 A
-11 B
+9 C ?
+10 B ?
+11 F - at least
