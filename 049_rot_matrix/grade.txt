@@ -1,6 +1,6 @@
-Grading at 10/06/2021:08:44:12.397765
-For commit ID 10fe84db2d6130d38a8fb8c0194a78ab54c8a623
-Grading at Wed Oct  6 04:44:07 EDT 2021
+Grading at 10/06/2021:08:48:57.186242
+For commit ID 35f739d9d2090b64393ed95cc718996fa2b240b3
+Grading at Wed Oct  6 04:48:52 EDT 2021
 Attempting to compile rotateMatrix.c
 testcase1 passed
 #################################################
@@ -17,10 +17,7 @@ testcase5:
 testcase5 passed
 #################################################
 testcase6:
-Line_1_did_not_match
-Line_2_did_not_match
-Line_3_did_not_match
-Your file did not match the expected output
-testcase6 failed, your output did not match with the answer
+Your file matched the expected output
+testcase6 passed
 
-Overall Grade: C
+Overall Grade: A
