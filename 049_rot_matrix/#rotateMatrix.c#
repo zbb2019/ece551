@@ -102,7 +102,7 @@ int main(int argc, char ** argv) {
   int * oldMatrix[10] = {
       old[0], old[1], old[2], old[3], old[4], old[5], old[6], old[7], old[8], old[9]};
   readMatrix(f, oldMatrix);
-  //  printf("Original 10x10 matrix:\n");
+  printf("Original 10x10 matrix:\n");
   //  printMatrix(oldMatrix, SIZE, SIZE);
 
   // rotate the matrix and store it into: int newMatrix[10][10]
