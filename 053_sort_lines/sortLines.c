@@ -14,7 +14,19 @@ void sortData(char ** data, size_t count) {
   qsort(data, count, sizeof(char *), stringOrder);
 }
 
-size_t readData(FILE * f, char ** data) {
+void printData(char ** data, size_t count) {
+  /* Do: printing out the strings in data, and free each of them 
+     right after printing */
+  if (data == NULL) {
+    fprintf(stderr, "Error: data = NULL");
+    exit(EXIT_FAILURE);
+  }
+  for (size_t i = 0; i < count; i++) {
+    printf("%s", data[i]);
+  }
+}
+
+size_t readData(FILE * f, char *** dataPointer) {
   /* Input: FILE * f - where to read the strings,
               char ** data - an array to store the strings;
      Output: size_t count - the number of strings contained in char ** data;
@@ -26,21 +38,20 @@ size_t readData(FILE * f, char ** data) {
   size_t count = 0;
 
   while (getline(&curr, &sz, f) >= 0) {
-    data = realloc(data, (count + 1) * sizeof(*data));
-    data[count] = curr;
+    *dataPointer = realloc(*dataPointer, (count + 1) * sizeof(**dataPointer));
+    (*dataPointer)[count] = curr;
     curr = NULL;
     count++;
   }
-  free(curr);
-  return count;
-}
-
-void printData(char ** data, size_t count) {
-  /* Do: printing out the strings in data, and free each of them right after printing */
-  for (size_t i = 0; i < count; i++) {
-    printf("%s", data[i]);
-    free(data[i]);
+  if (curr != NULL) {
+    free(curr);
   }
+  // address empty input/file
+  if (count == 0) {
+    fprintf(stderr, "Error: Empty input(file)!\n");
+    exit(EXIT_FAILURE);
+  }
+  return count;
 }
 
 void allSteps(FILE * f) {
@@ -48,18 +59,24 @@ void allSteps(FILE * f) {
   size_t count;
 
   // STEP 1 - read data,
-  count = readData(f, data);
+  count = readData(f, &data);
   // STEP 2 - sort,
   sortData(data, count);
+
   // STEP 3 - print
   printData(data, count);
+
   // STEP 4 - free memory
+  for (int i = 0; i < count; i++) {
+    free(data[i]);
+  }
   free(data);
 }
 
 int main(int argc, char ** argv) {
   //WRITE YOUR CODE HERE!
   FILE * f;
+  int c = -1;
 
   // CASE 1: no input files, use stdin
   if (argc == 1) {
@@ -68,13 +85,18 @@ int main(int argc, char ** argv) {
   }
   // CASE 2: use input files
   else {  // argc > 1
-    for (int i = 0; i < argc; i++) {
+    for (int i = 1; i < argc; i++) {
       f = fopen(argv[i], "r");
       if (f == NULL) {
         fprintf(stderr, "Error: File %s doesn't exist!\n", argv[i]);
         return EXIT_FAILURE;
       }
       allSteps(f);
+      c = fclose(f);
+      if (c != 0) {
+        fprintf(stderr, "Error: Failed to close the file %s\n", argv[i]);
+        return EXIT_FAILURE;
+      }
     }
   }
   // STEP 5: exit successfully
