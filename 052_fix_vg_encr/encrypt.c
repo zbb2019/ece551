@@ -22,6 +22,7 @@ void encrypt(FILE * f, int key, FILE * outfile) {
     }
     fprintf(outfile, "%s", line);
   }
+  free(line);
 }
 
 int main(int argc, char ** argv) {
@@ -46,6 +47,7 @@ int main(int argc, char ** argv) {
   strcat(outFileName, ".enc");
   FILE * outFile = fopen(outFileName, "w");
   encrypt(f, key, outFile);
+  free(outFileName);
   if (fclose(outFile) != 0) {
     perror("Failed to close the input file!");
     return EXIT_FAILURE;
