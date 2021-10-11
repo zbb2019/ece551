@@ -1,0 +1,18 @@
+Grading at 10/11/2021:05:15:30.284120
+For commit ID bbdf8fceef8f4c246e8f786322559f0fff0a3d73
+Grading at Mon Oct 11 01:15:26 EDT 2021
+Attempting to compile sortLines.c
+#################################################
+testcase1:
+valgrind reported memory errors
+#################################################
+testcase2:
+Your output is incorrect
+#################################################
+testcase3:
+valgrind reported memory errors
+#################################################
+testcase4:
+valgrind reported memory errors
+
+Overall Grade: F
