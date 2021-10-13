@@ -5,6 +5,10 @@
 #include <string.h>
 counts_t * createCounts(void) {
   //WRITE ME
+
+  /* This func create a new empty struct "counts_t" in heap, 
+     and return its pointer */
+
   counts_t * counts = malloc(sizeof(*counts));
   counts->arr = NULL;
   counts->arrSize = 0;
@@ -14,6 +18,11 @@ counts_t * createCounts(void) {
 
 void addCount(counts_t * c, const char * name) {
   //WRITE ME
+
+  /* This func lookup "name" in the counts_t struct "c", 
+     and increment a count for "name" at the right place inside "c"  
+  */
+
   // CASE 1: name is unknown
   if (name == NULL) {
     (c->unknownTimes)++;
@@ -41,6 +50,9 @@ void addCount(counts_t * c, const char * name) {
 
 void printCounts(counts_t * c, FILE * outFile) {
   //WRITE ME
+
+  /* This func fprintf all the counting results stored in c into "outFile" */
+
   for (size_t i = 0; i < c->arrSize; i++) {
     fprintf(outFile, "%s: %d\n", (c->arr[i]).name, (c->arr[i]).times);
   }
@@ -51,6 +63,10 @@ void printCounts(counts_t * c, FILE * outFile) {
 
 void freeCounts(counts_t * c) {
   //WRITE ME
+
+  /* This func free all the memory allocated for the counts_t * "c" 
+   */
+
   for (size_t i = 0; i < c->arrSize; i++) {
     free((c->arr[i]).name);
   }

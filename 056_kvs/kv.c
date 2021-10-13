@@ -5,8 +5,8 @@
 #include <string.h>
 
 void store(char ** line_p, int stopPoint, char ** keyORvalue_p) {
-  /* This func - 
-     stores the string before stopPoint into the string keyORvalue (from *line_p) 
+  /* This func - is used in func readKVs();
+     It stores the string before stopPoint into the string keyORvalue (from *line_p) 
   */
   int j = 0;  // the size of the allocated array (that key or value points to)
   while (**line_p != stopPoint) {  // store all letters between '=' and '\n\0' (exlusive)
@@ -21,6 +21,11 @@ void store(char ** line_p, int stopPoint, char ** keyORvalue_p) {
 
 kvarray_t * readKVs(const char * fname) {
   //WRITE ME
+
+  /* This func reads a file that contains a list of key/value pairs, then 
+     split and store them into a pointer to kvarray_t and return it. 
+   */
+
   /* Note: 
      malloc create an specified-size array of "something" in the heap, 
      meaning "something" is already declared, but still waiting to be initialized 
