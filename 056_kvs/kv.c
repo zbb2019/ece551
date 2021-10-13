@@ -31,7 +31,9 @@ kvarray_t * readKVs(const char * fname) {
 
   // data for read the lines of text
   char * line = NULL;
-  size_t linesz;
+  char * lineCopy =
+      NULL;       // use this pointer to move within the strings, so we can free(line);
+  size_t linesz;  // size of the array allocated (getline's returnvalue = # of chars read)
 
   char * equalSign = NULL;  // a pointer to '='
 
@@ -45,6 +47,8 @@ kvarray_t * readKVs(const char * fname) {
 
   // STEP 2 - read the lines of text
   while (getline(&line, &linesz, f) >= 0) {
+    lineCopy = line;
+
     // STEP 3+4 - split the lines into key/value pairs + add the pairs in to an array
     // 3a. find '=' in this line, and check error
     equalSign = strchr(line, '=');
@@ -59,14 +63,13 @@ kvarray_t * readKVs(const char * fname) {
 
     // 3b. store key into the pair
     currPair->key = NULL;
-    store(&line, '=', &(currPair->key));
-    line++;  //line was pointing to '=', so increment it
+    store(&lineCopy, '=', &(currPair->key));
+    lineCopy++;  //line was pointing to '=', so increment it
 
     // 3c. store value
     currPair->value = NULL;
-    store(&line, '\n', &(currPair->value));
+    store(&lineCopy, '\n', &(currPair->value));
 
-    line = NULL;
     i++;
   }
   free(line);
