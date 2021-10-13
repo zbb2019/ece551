@@ -1,73 +1,21 @@
-Grading at 10/13/2021:05:27:38.747491
-For commit ID 7aeab621be02ec029f405f57a7c6fa7579e3c0f8
-Grading at Wed Oct 13 01:27:34 EDT 2021
+Grading at 10/13/2021:06:11:36.619046
+For commit ID a7509f5c4e18b1bebfdd6271a826fa9b13f1596a
+Grading at Wed Oct 13 02:11:32 EDT 2021
 Attempting to compile:
 #################################################
 testcase1:
 Your output is correct
-  - Valgrind reported errors
-valgrind was not clean
-==100997== Memcheck, a memory error detector
-==100997== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==100997== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
-==100997== 
-==100997== Parent PID: 100996
-==100997== 
-==100997== 
-==100997== HEAP SUMMARY:
-==100997==     in use at exit: 720 bytes in 6 blocks
-==100997==   total heap usage: 99 allocs, 93 frees, 10,264 bytes allocated
-==100997== 
-==100997== 720 bytes in 6 blocks are definitely lost in loss record 1 of 1
-==100997==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==100997==    by 0x4EBBBFB: getdelim (iogetdelim.c:62)
-==100997==    by 0x108C83: readKVs (in kv_test)
-==100997==    by 0x108E8A: main (in kv_test)
-==100997== 
-==100997== LEAK SUMMARY:
-==100997==    definitely lost: 720 bytes in 6 blocks
-==100997==    indirectly lost: 0 bytes in 0 blocks
-==100997==      possibly lost: 0 bytes in 0 blocks
-==100997==    still reachable: 0 bytes in 0 blocks
-==100997==         suppressed: 0 bytes in 0 blocks
-==100997== 
-==100997== For counts of detected and suppressed errors, rerun with: -v
-==100997== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+  - Valgrind was clean (no errors, no memory leaks)
+valgrind was clean
 #################################################
 testcase2:
 Your output is correct
-  - Valgrind reported errors
-valgrind was not clean
-==101047== Memcheck, a memory error detector
-==101047== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==101047== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
-==101047== 
-==101047== Parent PID: 101046
-==101047== 
-==101047== 
-==101047== HEAP SUMMARY:
-==101047==     in use at exit: 720 bytes in 6 blocks
-==101047==   total heap usage: 143 allocs, 137 frees, 10,748 bytes allocated
-==101047== 
-==101047== 720 bytes in 6 blocks are definitely lost in loss record 1 of 1
-==101047==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==101047==    by 0x4EBBBFB: getdelim (iogetdelim.c:62)
-==101047==    by 0x108C83: readKVs (in kv_test)
-==101047==    by 0x108E8A: main (in kv_test)
-==101047== 
-==101047== LEAK SUMMARY:
-==101047==    definitely lost: 720 bytes in 6 blocks
-==101047==    indirectly lost: 0 bytes in 0 blocks
-==101047==      possibly lost: 0 bytes in 0 blocks
-==101047==    still reachable: 0 bytes in 0 blocks
-==101047==         suppressed: 0 bytes in 0 blocks
-==101047== 
-==101047== For counts of detected and suppressed errors, rerun with: -v
-==101047== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+  - Valgrind was clean (no errors, no memory leaks)
+valgrind was clean
 #################################################
 testcase3:
 Your output is correct
   - Valgrind was clean (no errors, no memory leaks)
 valgrind was clean
 
-Overall Grade: B
+Overall Grade: A
