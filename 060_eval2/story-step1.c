@@ -12,15 +12,9 @@ int main(int argc, char ** argv) {
   */
 
   // STEP 1 - check input errors
-  if (argc != 2) {
-    fprintf(stderr, "Usage: Not exactly 1 input file!\n");
-    return EXIT_FAILURE;
-  }
+  checkArgc(argc, 2);
   FILE * f = fopen(argv[1], "r");
-  if (f == NULL) {
-    fprintf(stderr, "Usage: Input file doesn't exist!\n");
-    return EXIT_FAILURE;
-  }
+  checkFileExist(f);
 
   // STEP 2 - read the inputFile into an array of strings
   char ** lines = NULL;
