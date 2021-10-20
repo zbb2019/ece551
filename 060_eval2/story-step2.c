@@ -22,6 +22,10 @@ int main(int argc, char ** argv) {
   // STEP 2 - read file into lines
   char ** lines = NULL;
   size_t sz = readFile(f, &lines);
+  if (sz == 0) {
+    fprintf(stderr, "Warning: the input file is empty");
+    return EXIT_SUCCESS;
+  }
 
   // STEP 3 - parsing each line and store them into catarray_t
   catarray_t * cats = parsingWC(lines, sz);

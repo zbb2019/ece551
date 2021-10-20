@@ -46,11 +46,13 @@ size_t readFile(FILE * f, char *** linesp) {
   }
   free(curr);
 
+  /*
   // check empty file
-  if (i == 0) {
+    if (i == 0) {
     fprintf(stderr, "Error: the input file is empty");
     exit(EXIT_FAILURE);
   }
+  */
 
   return i;
 }

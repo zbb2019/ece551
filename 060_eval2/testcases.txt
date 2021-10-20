@@ -1,28 +1,34 @@
 #error
 story-step1 invalid.txt
-story-step1 empty.txt
+
 story-step2 invalid.txt
-story-step2 empty.txt
-story-step2 err_words.txt
-story-step2 err2_words.txt
 story-step2 err3_words.txt
 
 story-step3 invalid.txt story.txt
 story-step3 words.txt invalid.txt
 story-step3 empty.txt story.txt 
-story-step3 words.txt empty.txt
+
 story-step4 invalid.txt story.txt
 story-step4 words.txt invalid.txt
 story-step4 empty.txt story.txt 
-story-step4 words.txt empty.txt
+
 
 #success
 story-step1 story.txt
 story-step1 story2.txt
+story-step1 empty.txt
+
 story-step2 words.txt
+story-step2 empty.txt
+story-step2 err_words.txt
+story-step2 err2_words.txt
+
 story-step3 words.txt story.txt
 story-step3 words.txt story2.txt
+story-step3 words.txt empty.txt
+
 story-step4 words.txt story.txt
 story-step4 words.txt story2.txt
 story-step4 -n words.txt story.txt
 story-step4 -n words.txt story2.txt
+story-step4 words.txt empty.txt

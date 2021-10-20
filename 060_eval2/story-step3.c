@@ -30,6 +30,10 @@ int main(int argc, char ** argv) {
   // STEP 2 - read category/words file into linesCats
   char ** linesCats = NULL;
   size_t szCats = readFile(fcats, &linesCats);
+  if (szCats == 0) {
+    fprintf(stderr, "Error: the input cat/word file is empty");
+    return EXIT_FAILURE;
+  }
 
   // STEP 3 - parsing each line of cat/words and store them into catarray_t
   catarray_t * cats = parsingWC(linesCats, szCats);
