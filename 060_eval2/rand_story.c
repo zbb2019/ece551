@@ -68,6 +68,11 @@ char * copyPartialString(char ** start, char * end, int nullTerminatorYN) {
      char * - a pointer to the duplicated string stored in heap
    */
 
+  /* if (*start == end) {
+     fprintf(stderr, "Error: the part of string you would like copy is empty\n");
+     exit(EXIT_FAILURE);
+     }
+ */
   int length = end - *start + nullTerminatorYN;  //nullTerminatorYN = 1(yes) or 0(no)
   char * ans = malloc(length * sizeof(*ans));
   for (int i = 0; i < (length - nullTerminatorYN); i++) {
