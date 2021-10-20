@@ -48,7 +48,7 @@ size_t readFile(FILE * f, char *** linesp) {
 
   /*
   // check empty file
-    if (i == 0) {
+  if (i == 0) {
     fprintf(stderr, "Error: the input file is empty");
     exit(EXIT_FAILURE);
   }
@@ -70,11 +70,13 @@ char * copyPartialString(char ** start, char * end, int nullTerminatorYN) {
      char * - a pointer to the duplicated string stored in heap
    */
 
-  /* if (*start == end) {
+  /* // check empty word
+     if (*start == end) {
      fprintf(stderr, "Error: the part of string you would like copy is empty\n");
      exit(EXIT_FAILURE);
      }
- */
+  */
+
   int length = end - *start + nullTerminatorYN;  //nullTerminatorYN = 1(yes) or 0(no)
   char * ans = malloc(length * sizeof(*ans));
   for (int i = 0; i < (length - nullTerminatorYN); i++) {
@@ -149,7 +151,9 @@ void freeLines(char ** lines, size_t sz) {
   for (size_t i = 0; i < sz; i++) {
     free(lines[i]);
   }
-  free(lines);
+  if (lines != NULL) {
+    free(lines);
+  }
 }
 
 int lookupCategory(catarray_t * source, char * category) {
@@ -391,6 +395,10 @@ void freeCatarray_t(catarray_t * cats) {
     free(currCatp->words);
     free(currCatp->name);
   }
-  free(cats->arr);
-  free(cats);
+  if (cats->arr != NULL) {
+    free(cats->arr);
+  }
+  if (cats != NULL) {
+    free(cats);
+  }
 }
