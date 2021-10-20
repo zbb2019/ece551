@@ -15,10 +15,11 @@ int checkPosInt(char * category);
 const char * findPreviousWord(category_t * usedp, size_t index);
 void freeLines(char ** lines, size_t sz);
 
-void replaceNPrint(char ** lines, size_t sz, catarray_t * cats);
-
 int lookupCategory(catarray_t * source, char * category);
 int lookupWord(category_t * source, char * word);
+void deleteWord(char * category, catarray_t * cats, const char * word);
+
+void replaceNPrint(char ** lines, size_t sz, catarray_t * cats, int option);
 catarray_t * parsingWC(char ** lines, size_t sz);
 
 void freeCatarray_t(catarray_t * cat);

@@ -5,7 +5,9 @@
 #include "rand_story.h"
 
 int main(int argc, char ** argv) {
-  /* This program should parse the story template by printing the story 
+  /* STORY-STEP 1
+
+     This program parses the story template by printing the story 
      and replacing blanks with the word "cat". 
  
      Inputs - 1 command line arguments: 
@@ -22,7 +24,7 @@ int main(int argc, char ** argv) {
   size_t sz = readFile(f, &lines);
 
   // STEP 3 - print file to stdout, with the blank replaced with words
-  replaceNPrint(lines, sz, NULL);
+  replaceNPrint(lines, sz, NULL, 0);
 
   // STEP 4 - close file
   if (fclose(f) != 0) {

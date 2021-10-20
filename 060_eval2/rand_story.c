@@ -92,10 +92,8 @@ void storeWord(category_t * cat, const char * word) {
 
 int checkPosInt(char * category) {
   /* This func checks if category is a positive integer 
-     (i.e. all chars are digits, but !=0)
-  
-     Output:
-     1 if yes, 0 if no
+     (i.e. all chars are digits, but !=0), and return 1 if yes;
+     return 0 if no
  */
   size_t sz = strlen(category);
   for (size_t i = 0; i < sz; i++) {
@@ -112,6 +110,9 @@ int checkPosInt(char * category) {
 }
 
 const char * findPreviousWord(category_t * usedp, size_t index) {
+  /* This func find and return the specified previously written word,
+     which is stored in 'category_t * usedp', according to  the given index.
+   */
   if (index < 1) {
     fprintf(stderr, "Error: the given category name contains a integer < 1\n");
     exit(EXIT_FAILURE);
@@ -144,7 +145,79 @@ void freeLines(char ** lines, size_t sz) {
   free(lines);
 }
 
-void replaceNPrint(char ** lines, size_t sz, catarray_t * cats) {
+int lookupCategory(catarray_t * source, char * category) {
+  /* This func take a pointer to catarray_t and a category (char *), and check 
+     whether the catarray_t already contain this category. If yes, return the 
+     index (i) of the matching category_t; else, return -1. 
+   */
+  for (size_t i = 0; i < source->n; i++) {
+    if (strcmp((source->arr[i]).name, category) == 0) {
+      return i;
+    }
+  }
+  // if not found
+  return -1;
+}
+
+int lookupWord(category_t * source, char * word) {
+  /* This func take a pointer to category_t and a word (char *), and check 
+     whether the category_t already contain this word. If yes, return the 
+     index (i) of the matching word; else, return -1.
+  */
+  for (size_t i = 0; i < source->n_words; i++) {
+    if (strcmp((source->words)[i], word) == 0) {
+      return i;
+    }
+  }
+  // if not found
+  return -1;
+}
+
+void deleteWord(char * category, catarray_t * cats, const char * word) {
+  /* This func delete the given word of the given category in 'catarray_t * cats'
+   */
+  char * wordCopy = malloc((strlen(word) + 1) * sizeof(*wordCopy));
+  strcpy(wordCopy, word);
+
+  // free and set the current 'char * word' to NULL
+  int indexCat = lookupCategory(cats, category);
+  category_t * targetCat = &(cats->arr[indexCat]);
+  int indexWord = lookupWord(targetCat, wordCopy);
+  free(targetCat->words[indexWord]);
+  targetCat->words[indexWord] = NULL;
+
+  // free the wordCopy we malloced in the beginning of the func
+  free(wordCopy);
+
+  // COND 1 -  if the category contains only this 1 word, delete the old 'char ** words'
+  size_t oldWordsSz = targetCat->n_words;
+  if (oldWordsSz == 1) {
+    free(targetCat->words);
+    targetCat->words = NULL;
+    targetCat->n_words = 0;
+    return;
+  }
+
+  // COND 2 - the category containes more than this 1 word
+  // malloc a new 'char ** words'
+  char ** new = malloc((oldWordsSz - 1) * sizeof(*new));
+  // copy everything from old to the new 'char ** words'
+  size_t j = 0;
+  for (size_t i = 0; i < oldWordsSz; i++) {
+    if (targetCat->words[i] != NULL) {
+      new[j] = targetCat->words[i];
+      j++;
+    }
+  }
+  // free the old 'char ** words'
+  free(targetCat->words);
+  // move the pointer to point to the new 'char ** words'
+  targetCat->words = new;
+  // update the size of the new 'char ** words'
+  targetCat->n_words--;
+}
+
+void replaceNPrint(char ** lines, size_t sz, catarray_t * cats, int option) {
   /* This func prints each string in lines, while replacing each '_category_' 
      with the respected word.
 
@@ -152,6 +225,7 @@ void replaceNPrint(char ** lines, size_t sz, catarray_t * cats) {
      char ** lines - the array of strings to print
      size_t sz - the size of 'lines'
      catarray_t * cats - a pointer to the struct where to search category/words
+     option - =1 if option '-n' is passed in, else =0
 
      Output: void
   */
@@ -198,13 +272,16 @@ void replaceNPrint(char ** lines, size_t sz, catarray_t * cats) {
         const char * word = chooseWord(category, cats);
         fprintf(stdout, "%s", word);
       }
-      // ---------------- For story-step3----------------------------
+      // ---------------- For story-step3 & 4----------------------------
       else {
         // CONDITION A - _category_ is a category (not a pos integer)
         if (checkPosInt(category) != 1) {
           const char * word = chooseWord(category, cats);
           fprintf(stdout, "%s", word);
           storeWord(&used, word);  // add the word to the list of used words
+          if (option == 1) {
+            deleteWord(category, cats, word);
+          }
         }
         else {  // CONDITION B - category is a positive integer (>=0)
           size_t a = atoi(category);  // size_t???
@@ -229,33 +306,6 @@ void replaceNPrint(char ** lines, size_t sz, catarray_t * cats) {
   if (used.words != NULL) {
     freeLines(used.words, used.n_words);
   }
-}
-int lookupCategory(catarray_t * source, char * category) {
-  /* This func take a pointer to catarray_t and a category (char *), and check 
-     whether the catarray_t already contain this category. If yes, return the 
-     index (i) of the matching category_t; else, return -1. 
-   */
-  for (size_t i = 0; i < source->n; i++) {
-    if (strcmp((source->arr[i]).name, category) == 0) {
-      return i;
-    }
-  }
-  // if not found
-  return -1;
-}
-
-int lookupWord(category_t * source, char * word) {
-  /* This func take a pointer to category_t and a word (char *), and check 
-     whether the category_t already contain this word. If yes, return the 
-     index (i) of the matching word; else, return -1.
-  */
-  for (size_t i = 0; i < source->n_words; i++) {
-    if (strcmp((source->words)[i], word) == 0) {
-      return i;
-    }
-  }
-  // if not found
-  return -1;
 }
 
 catarray_t * parsingWC(char ** lines, size_t sz) {

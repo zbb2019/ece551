@@ -5,10 +5,12 @@
 #include "rand_story.h"
 
 int main(int argc, char ** argv) {
-  /* Input: one command line argument - the name of the file with the 
+  /* STORY-STEP 2
+
+     Input: one command line argument - the name of the file with the 
      categories and words. 
      
-     This program should read from the input file and store the words into 
+     This program reads from the input file and store the words into 
      a catarray_t and print them using the provided function printWords.
   */
 
