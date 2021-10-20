@@ -22,10 +22,6 @@ int main(int argc, char ** argv) {
   // STEP 2 - read the inputFile into an array of strings
   char ** lines = NULL;
   size_t sz = readFile(f, &lines);
-  if (sz == 0) {
-    fprintf(stderr, "Warning: the input file is empty");
-    return EXIT_SUCCESS;
-  }
 
   // STEP 3 - print file to stdout, with the blank replaced with words
   replaceNPrint(lines, sz, NULL, 0);
