@@ -7,21 +7,22 @@
 int main(int argc, char ** argv) {
   /* This program should parse the story template by printing the story 
      and replacing blanks with the word "cat". 
-  
-     Input: 1 command line argument - the file to read the story template from. 
+ 
+     Inputs - 1 command line arguments: 
+     1. the name of the file for the story template.  
   */
 
   // STEP 1 - check input errors
   checkArgc(argc, 2);
   FILE * f = fopen(argv[1], "r");
-  checkFileExist(f);
+  checkFileExist(f, argv[1]);
 
   // STEP 2 - read the inputFile into an array of strings
   char ** lines = NULL;
   size_t sz = readFile(f, &lines);
 
   // STEP 3 - print file to stdout, with the blank replaced with words
-  replaceNPrint(lines, sz);
+  replaceNPrint(lines, sz, NULL);
 
   // STEP 4 - close file
   if (fclose(f) != 0) {

@@ -1,22 +1,25 @@
 #include "rand_story.h"
 
+#include <ctype.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 void checkArgc(int argc, int expectArgc) {
   /* This func check whether the number of command line input arguments (from main.c) 
-     is equal to the expected number.
+     is equal to the expected number. 
   */
+
   if (argc != expectArgc) {
     fprintf(stderr, "Usage: Not exactly %d input file(s)!\n", expectArgc - 1);
     exit(EXIT_FAILURE);
   }
 }
 
-void checkFileExist(FILE * f) {
+void checkFileExist(FILE * f, char * filename) {
   /* This func check whether the file we opened exists or not. */
   if (f == NULL) {
-    fprintf(stderr, "Usage: Input file doesn't exist!\n");
+    fprintf(stderr, "Usage: the input file '%s' doesn't exist!\n", filename);
     exit(EXIT_FAILURE);
   }
 }
@@ -78,61 +81,50 @@ char * copyPartialString(char ** start, char * end, int nullTerminatorYN) {
   return ans;
 }
 
-void replaceNPrint(char ** lines, size_t sz) {
-  /* This func prints each string in lines, while replacing each '_category_' 
-     with the respected word.
+void storeWord(category_t * cat, const char * word) {
+  /* This func store a word to the struct, which category_t * cat points to */
+  cat->words = realloc(cat->words, (cat->n_words + 1) * sizeof(*(cat->words)));
+  cat->words[cat->n_words] =
+      malloc((strlen(word) + 1) * sizeof(*(cat->words[cat->n_words])));
+  strcpy(cat->words[cat->n_words], word);
+  cat->n_words++;
+}
 
-     Inputs:
-     char ** lines - the array of strings to print
-     size_t sz - the size of 'lines'
-
-     Output: void
-  */
-
+int checkPosInt(char * category) {
+  /* This func checks if category is a positive integer 
+     (i.e. all chars are digits, but !=0)
+  
+     Output:
+     1 if yes, 0 if no
+ */
+  size_t sz = strlen(category);
   for (size_t i = 0; i < sz; i++) {
-    char * str = lines[i];
-
-    // 1. check if this sentense contains _category_
-    char * underscore = strchr(str, '_');
-    while (underscore != NULL) {  // found _category_
-
-      // 2a. print the part before '_'
-      while (str < underscore) {
-        fprintf(stdout, "%c", *str);
-        str++;
-      }
-      str++;  // now the string starts right after the 1st '_'
-
-      // 2b. check error for _category_
-      underscore = strchr(str, '_');
-      if (underscore == NULL) {
-        fprintf(stderr,
-                "Error: Wrong format of '_category' found in inputFile(story)!\n");
-        exit(EXIT_FAILURE);
-      }
-      else if (str == underscore) {
-        fprintf(stderr, "Error: Wrong format of '__' found in inputFile(story)!\n");
-        exit(EXIT_FAILURE);
-      }
-
-      // 2c. copy category into a seperate string
-      char * category = copyPartialString(&str, underscore, 1);
-
-      // 2d. call chooseWord() and print the returned word
-      const char * word = chooseWord(category, NULL);
-      fprintf(stdout, "%s", word);
-
-      // free char * category
-      free(category);
-
-      // 2e: Next Loop Iteration:
-      // continue to check if the rest of the sentence contains _category_
-      underscore = strchr(str, '_');
+    if (isdigit(category[i]) == 0) {  // if = 0, not a digit
+      return 0;
     }
-
-    //3. print the part after all '_category_' (no _category_ found in str)
-    fprintf(stdout, "%s", str);
   }
+
+  if (atoi(category) == 0) {
+    return 0;
+  }
+
+  return 1;
+}
+
+const char * findPreviousWord(category_t * usedp, size_t index) {
+  if (index < 1) {
+    fprintf(stderr, "Error: the given category name contains a integer < 1\n");
+    exit(EXIT_FAILURE);
+  }
+  else if (index > usedp->n_words) {
+    fprintf(stderr,
+            "Error: the story wants to write the %zu-th previous written word,\n"
+            "\tbut we have only written %zu words so far.\n",
+            index,
+            usedp->n_words);
+    exit(EXIT_FAILURE);
+  }
+  return usedp->words[usedp->n_words - index];
 }
 
 void freeLines(char ** lines, size_t sz) {
@@ -152,6 +144,92 @@ void freeLines(char ** lines, size_t sz) {
   free(lines);
 }
 
+void replaceNPrint(char ** lines, size_t sz, catarray_t * cats) {
+  /* This func prints each string in lines, while replacing each '_category_' 
+     with the respected word.
+
+     Inputs:
+     char ** lines - the array of strings to print
+     size_t sz - the size of 'lines'
+     catarray_t * cats - a pointer to the struct where to search category/words
+
+     Output: void
+  */
+
+  // declare a category_t to store usedWords
+  category_t used;
+  used.name = "used";
+  used.n_words = 0;
+  used.words = NULL;
+
+  //start parsing each line in the story template
+  for (size_t i = 0; i < sz; i++) {
+    char * str = lines[i];
+
+    // STEP 1 - if str contains _category_
+    char * underscore = strchr(str, '_');
+    while (underscore != NULL) {  // found _category_
+
+      // 1a. print the part before '_category_'
+      while (str < underscore) {
+        fprintf(stdout, "%c", *str);
+        str++;
+      }
+      str++;  // now the string starts right after the 1st '_'
+
+      // 1b. check error in '_category_'
+      underscore = strchr(str, '_');
+      if (underscore == NULL) {
+        fprintf(stderr,
+                "Error: Wrong format of '_category' found in inputFile(story)!\n");
+        exit(EXIT_FAILURE);
+      }
+      else if (str == underscore) {
+        fprintf(stderr, "Error: Wrong format of '__' found in inputFile(story)!\n");
+        exit(EXIT_FAILURE);
+      }
+
+      // 1c. copy the 'category' into a seperate string
+      char * category = copyPartialString(&str, underscore, 1);
+
+      // 1d. replace _category_ with the corresponding word + print it to stdout
+      // ---------------- For Story-step1----------------------------
+      if (cats == NULL) {
+        const char * word = chooseWord(category, cats);
+        fprintf(stdout, "%s", word);
+      }
+      // ---------------- For story-step3----------------------------
+      else {
+        // CONDITION A - _category_ is a category (not a pos integer)
+        if (checkPosInt(category) != 1) {
+          const char * word = chooseWord(category, cats);
+          fprintf(stdout, "%s", word);
+          storeWord(&used, word);  // add the word to the list of used words
+        }
+        else {  // CONDITION B - category is a positive integer (>=0)
+          size_t a = atoi(category);  // size_t???
+          const char * word = findPreviousWord(&used, a);
+          fprintf(stdout, "%s", word);
+          storeWord(&used, word);
+        }
+      }
+
+      // 1e. free char * category
+      free(category);
+
+      // 1f. check if the rest of str still contains _category_
+      underscore = strchr(str, '_');
+    }  // the end of loop - while('_category_' can be found in str){}
+
+    // STEP 2 - when no more '_category_' is found in str
+    fprintf(stdout, "%s", str);
+  }  // the end of for loop (parsing each line of the story template)
+
+  // STEP 3 -  free 'char ** words' in 'category_t used'
+  if (used.words != NULL) {
+    freeLines(used.words, used.n_words);
+  }
+}
 int lookupCategory(catarray_t * source, char * category) {
   /* This func take a pointer to catarray_t and a category (char *), and check 
      whether the catarray_t already contain this category. If yes, return the 
@@ -225,22 +303,15 @@ catarray_t * parsingWC(char ** lines, size_t sz) {
       currCatp->name = malloc((strlen(category) + 1) * sizeof(*(currCatp->name)));
       strcpy(currCatp->name, category);
       // 3b. store word
-      currCatp->words = malloc(sizeof(*(currCatp->words)));
-      currCatp->words[0] = malloc((strlen(word) + 1) * sizeof(*(currCatp->words[0])));
-      strcpy(currCatp->words[0], word);
-      currCatp->n_words = 1;
+      currCatp->words = NULL;
+      currCatp->n_words = 0;
+      storeWord(currCatp, word);
     }
     else {  // if this category already exit
       if (lookupWord(&(ans->arr[index]), word) == -1) {
         // if this word doesn't exist yet, store the word
         category_t * currCatp = &ans->arr[index];
-        currCatp->words = realloc(currCatp->words,
-                                  (currCatp->n_words + 1) * sizeof(*(currCatp->words)));
-        currCatp->words[currCatp->n_words] =
-            malloc((strlen(word) + 1) * sizeof(*(currCatp->words[currCatp->n_words])));
-
-        strcpy(currCatp->words[currCatp->n_words], word);
-        currCatp->n_words++;
+        storeWord(currCatp, word);
       }
       // if this word already exist in this category, do nothing
     }
@@ -250,12 +321,12 @@ catarray_t * parsingWC(char ** lines, size_t sz) {
   return ans;
 }
 
-void freeCatarray_t(catarray_t * cat) {
+void freeCatarray_t(catarray_t * cats) {
   /* This func frees all the memory allocated by the input -- catarray_t * cat */
 
   // for each category in the array
-  for (size_t i = 0; i < cat->n; i++) {
-    category_t * currCatp = &cat->arr[i];
+  for (size_t i = 0; i < cats->n; i++) {
+    category_t * currCatp = &cats->arr[i];
     // for each word in the category_t
     for (size_t j = 0; j < currCatp->n_words; j++) {
       free(currCatp->words[j]);
@@ -263,6 +334,6 @@ void freeCatarray_t(catarray_t * cat) {
     free(currCatp->words);
     free(currCatp->name);
   }
-  free(cat->arr);
-  free(cat);
+  free(cats->arr);
+  free(cats);
 }

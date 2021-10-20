@@ -15,7 +15,7 @@ int main(int argc, char ** argv) {
   // STEP 1 - check input errors
   checkArgc(argc, 2);
   FILE * f = fopen(argv[1], "r");
-  checkFileExist(f);
+  checkFileExist(f, argv[1]);
 
   // STEP 2 - read file into lines
   char ** lines = NULL;
