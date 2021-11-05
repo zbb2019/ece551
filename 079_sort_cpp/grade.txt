@@ -1,6 +1,40 @@
-Grading at 11/05/2021:04:27:11.576782
-For commit ID a361b830b5e5b2b071e9c139cae0cab438f658be
-Grading at Fri Nov  5 00:27:11 EDT 2021
-You seem to have .c files.  You should only have .cpp files!
+Grading at 11/05/2021:04:49:53.772756
+For commit ID e8ef0ca84f1e0695ac90adeab97bee97b26c4049
+Grading at Fri Nov  5 00:49:46 EDT 2021
+Looking for malloc in your files
+No uses found (good).
+Looking for free in your files
+No uses found (good).
+Looking for FILE in your files
+No uses found (good).
+Looking for realloc in your files
+No uses found (good).
+Looking for qsort in your files
+No uses found (good).
+Looking for printf in your files
+sortLines.cpp:    fprintf(stderr, "Error: Empty input(file)!\n");
+No uses found (good).
+Attempting to compile with make
+g++ -o sortLines --std=gnu++98 -pedantic -Wall -Werror -ggdb3 sortLines.cpp
+Using sortLines..
+#################################################
+testcase1:
+testcase1 passed, your program successfully indicated a failure
+valgrind was clean
+#################################################
+testcase2:
+Your output is correct
+  - Valgrind was clean (no errors, no memory leaks)
+valgrind was clean
+#################################################
+testcase3:
+Your output is correct
+  - Valgrind was clean (no errors, no memory leaks)
+valgrind was clean
+#################################################
+testcase4:
+Your output is correct
+  - Valgrind was clean (no errors, no memory leaks)
+valgrind was clean
 
-Overall Grade: F
+Overall Grade: A
