@@ -47,7 +47,7 @@ class PlusExpression : public Expression {
 
   virtual std::string toString() const {  //actually implement it
     std::stringstream s;
-    s << "(" << l->toString() << " + " << r->toString() << ")" << std::endl;
+    s << "(" << l->toString() << " + " << r->toString() << ")";
     return s.str();
   }
 
@@ -71,7 +71,7 @@ class MinusExpression : public Expression {
 
   virtual std::string toString() const {  //actually implement it
     std::stringstream s;
-    s << "(" << l->toString() << " - " << r->toString() << ")" << std::endl;
+    s << "(" << l->toString() << " - " << r->toString() << ")";
     return s.str();
   }
 
@@ -95,7 +95,7 @@ class TimesExpression : public Expression {
 
   virtual std::string toString() const {  //actually implement it
     std::stringstream s;
-    s << "(" << l->toString() << " * " << r->toString() << ")" << std::endl;
+    s << "(" << l->toString() << " * " << r->toString() << ")";
     return s.str();
   }
 
@@ -119,7 +119,7 @@ class DivExpression : public Expression {
 
   virtual std::string toString() const {  //actually implement it
     std::stringstream s;
-    s << "(" << l->toString() << " / " << r->toString() << ")" << std::endl;
+    s << "(" << l->toString() << " / " << r->toString() << ")";
     return s.str();
   }
 
