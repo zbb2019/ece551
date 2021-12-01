@@ -129,9 +129,8 @@ class LinkedList {
   // copy constructor
   LinkedList(const LinkedList & rhs) : head(NULL), tail(NULL), size(0) {
     for (int i = 0; i < rhs.getSize(); i++) {
-      this->addBack(rhs[i]);
+      this->addBack(rhs[i]);  // size has also been modified during addBack()
     }
-    size = rhs.getSize();
   }
 
   // = operator
@@ -151,7 +150,7 @@ class LinkedList {
         size = 0;
       }
       for (int i = 0; i < rhs.getSize(); i++) {
-        this->addBack(rhs[i]);
+        this->addBack(rhs[i]);  // size has also been modified during addBack()
       }
     }
     return *this;
