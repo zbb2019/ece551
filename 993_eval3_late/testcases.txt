@@ -1,0 +1,17 @@
+#error
+cyoa-step1 page0.txt
+cyoa-step1 page000.txt
+cyoa-step1 page-12.txt
+
+cyoa-step1 page99.txt
+cyoa-step1 page990.txt
+cyoa-step1 page997.txt
+cyoa-step1 page998.txt
+cyoa-step1 page999.txt
+
+
+#success
+cyoa-step1 page1.txt
+cyoa-step1 page5.txt
+cyoa-step1 page6.txt
+cyoa-step1 page8.txt
