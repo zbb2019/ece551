@@ -1,0 +1,11 @@
+CFLAGS=-std=gnu++98 -pedantic -Wall -Werror -ggdb3
+PROGS=cyoa-step1 cyoa-step2 cyoa-step3 cyoa-step4
+all: $(PROGS)
+cyoa-step%: cyoa-step%.o page.hpp
+	g++ -o $@ $^ 
+%.o: %.cpp
+	g++ $(CFLAGS) -c $<
+
+.PHONY: clean
+clean:
+	rm -f *~ $(PROGS) 

@@ -1,0 +1,12 @@
+#error
+page99.txt = invalid file, non-existing
+page990.txt = empty file
+page997.txt = choice leads to page0
+page998.txt = found empty line in choices section
+page999.txt = found empty line b/w WIN/LOSE and #-line
+
+#success
+page1.txt = choice
+page5.txt = choice
+page6.txt = LOSE
+page8.txt = WIN
