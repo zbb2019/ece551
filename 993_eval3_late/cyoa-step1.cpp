@@ -21,7 +21,13 @@ size_t parseCheckPageFilename(char * filename) {
      
    */
 
-  // 1. check if filename is in format of "page___.txt"
+  // 1. delete the 'dir_name/'s in the pathname before the actual filename 'page.txt'
+  char * dash = NULL;
+  while ((dash = strchr(filename, '/')) != NULL) {
+    filename = dash + 1;
+  }
+
+  // 2. check if filename is in format of "page___.txt"
   char * dot = strchr(filename, '.');
   if (strncmp(filename, "page", 4) != 0 || dot == NULL || strcmp(dot, ".txt") != 0) {
     std::cerr << "Usage: Incorrect pagefile format (should be page___.txt): " << filename
@@ -29,7 +35,7 @@ size_t parseCheckPageFilename(char * filename) {
     throw std::exception();
   }
 
-  // 2. verify the ___ in page___.txt are all digits (i.e. page# is an int >= 0)
+  // 3. verify the ___ in page___.txt are all digits (i.e. page# is an int >= 0)
   //    and store it into a string <pn_str>
   char * number = filename + 4;
   std::string pn_str;
@@ -44,11 +50,11 @@ size_t parseCheckPageFilename(char * filename) {
     number++;
   }
 
-  // 3. convert the page# from <pn_str> into a size_type <pn>
+  // 4. convert the page# from <pn_str> into a size_type <pn>
   size_t pn;
   std::stringstream(pn_str) >> pn;
 
-  // 4. verify that (page# != 0), detect "page0.txt"
+  // 5. verify that (page# != 0), detect "page0.txt"
   if (pn == 0) {
     std::cerr << "Usage: Cannot take page0.txt OR " << filename
               << " as the input page file!" << std::endl;
