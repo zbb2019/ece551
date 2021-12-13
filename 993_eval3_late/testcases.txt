@@ -12,8 +12,11 @@ cyoa-step1 testfiles-step1/page999.txt
 cyoa-step2 /usr/local/ece551/cyoa/broken1
 cyoa-step2 /usr/local/ece551/cyoa/broken2
 cyoa-step2 noWinPageStory/
+cyoa-step2 noWinPageStory/ < gameInputs-step2/forNoWin-lose.txt
 cyoa-step2 noLosePageStory/
 cyoa-step2 onePageUnreferred/
+
+
 
 
 #success
@@ -22,5 +25,7 @@ cyoa-step1 story1/page5.txt
 cyoa-step1 story1/page6.txt
 cyoa-step1 story1/page8.txt
 
-cyoa-step2 story1/
-cyoa-step2 story2
+cyoa-step2 story1/ < gameInputs-step2/input1-win.txt
+cyoa-step2 story1 < gameInputs-step2/input1-lose.txt
+cyoa-step2 story2/ < gameInputs-step2/input2-win.txt
+cyoa-step2 story2 < gameInputs-step2/input2-lose.txt
