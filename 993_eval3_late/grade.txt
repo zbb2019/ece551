@@ -1,6 +1,6 @@
-Grading at 12/13/2021:08:22:07.688366
-For commit ID 35bd29dcd160048854ca84f065154af40e00e74e
-Grading at Mon Dec 13 03:21:29 EST 2021
+Grading at 12/13/2021:08:54:25.985036
+For commit ID 3135f2805ec836df3c922f07c3fd705a8f9ad647
+Grading at Mon Dec 13 03:53:48 EST 2021
 Checking Step 1 test cases required for extra credit
 
 Compiling cyoa-step1
@@ -127,38 +127,48 @@ Your program successfully indicated a failure case
 Test case 11 (error): cyoa-step2 noWinPageStory/
 Your program successfully indicated a failure case
 +-----------------------------------------------------------------------+
-Test case 12 (error): cyoa-step2 noLosePageStory/
+Test case 12 (error): cyoa-step2 noWinPageStory/ < gameInputs-step2/forNoWin-lose.txt
 Your program successfully indicated a failure case
 +-----------------------------------------------------------------------+
-Test case 13 (error): cyoa-step2 onePageUnreferred/
+Test case 13 (error): cyoa-step2 noLosePageStory/
+Your program successfully indicated a failure case
++-----------------------------------------------------------------------+
+Test case 14 (error): cyoa-step2 onePageUnreferred/
 Your program successfully indicated a failure case
 
 Compiling cyoa-step1
 rm -f *~ cyoa-step1 cyoa-step2 cyoa-step3 cyoa-step4
 g++ -o cyoa-step1 -std=gnu++98 -pedantic -Wall -Werror -ggdb3 cyoa-step1.cpp
 +-----------------------------------------------------------------------+
-Test case 14 (success): cyoa-step1 story1/page1.txt
+Test case 15 (success): cyoa-step1 story1/page1.txt
 Your file matched the expected output
 +-----------------------------------------------------------------------+
-Test case 15 (success): cyoa-step1 story1/page5.txt
+Test case 16 (success): cyoa-step1 story1/page5.txt
 Your file matched the expected output
 +-----------------------------------------------------------------------+
-Test case 16 (success): cyoa-step1 story1/page6.txt
+Test case 17 (success): cyoa-step1 story1/page6.txt
 Your file matched the expected output
 +-----------------------------------------------------------------------+
-Test case 17 (success): cyoa-step1 story1/page8.txt
+Test case 18 (success): cyoa-step1 story1/page8.txt
 Your file matched the expected output
 
 Compiling cyoa-step2
 rm -f *~ cyoa-step1 cyoa-step2 cyoa-step3 cyoa-step4
 g++ -o cyoa-step2 -std=gnu++98 -pedantic -Wall -Werror -ggdb3 cyoa-step2.cpp
 +-----------------------------------------------------------------------+
-Test case 18 (success): cyoa-step2 story1/
-We considered this an error case and gave the following message:
-Cannot read from stdin
-Valgrind reported memory errors
+Test case 19 (success): cyoa-step2 story1/ < gameInputs-step2/input1-win.txt
+Your file matched the expected output
++-----------------------------------------------------------------------+
+Test case 20 (success): cyoa-step2 story1 < gameInputs-step2/input1-lose.txt
+Your file matched the expected output
++-----------------------------------------------------------------------+
+Test case 21 (success): cyoa-step2 story2/ < gameInputs-step2/input2-win.txt
+Your file matched the expected output
++-----------------------------------------------------------------------+
+Test case 22 (success): cyoa-step2 story2 < gameInputs-step2/input2-lose.txt
+Your file matched the expected output
 
-You have FAILED one or more of your test cases
-Keep debugging
+You have PASSED all of your test cases
+Keep adding test cases until you are satisfied your program is correct
 
 Overall Grade: NO GRADE YET
