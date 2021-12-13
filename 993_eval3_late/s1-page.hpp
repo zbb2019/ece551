@@ -68,7 +68,7 @@ class Page {
 
     // check the number before ":"
     for (size_t i = 0; i < pos; i++) {
-      if (isdigit(currLine[i]) == 0) {
+      if (isdigit(currLine[i]) == 0) {  // CITE - isdigit(char)
         std::cerr << "Error: Input Pagefile - Wrong format for the choices section!"
                   << std::endl
                   << "\t---- Not pure numbers before the colon!" << std::endl;

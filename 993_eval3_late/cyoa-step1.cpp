@@ -12,7 +12,7 @@
 #include <string>
 #include <vector>
 
-#include "page.hpp"
+#include "s1-page.hpp"
 
 size_t parseCheckPageFilename(char * filename) {
   /* This func parse the page's filename,

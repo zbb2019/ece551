@@ -1,0 +1,36 @@
+---------------------cyoa-step1------------------------
+#error
+testfiles-step1/page0.txt = invalid filename
+testfiles-step1/page000.txt = invalid filename
+testfiles-step1/page-12.txt = invalid filename
+
+testfiles-step1/page99.txt = invalid file, non-existing
+testfiles-step1/page990.txt = empty file
+testfiles-step1/page997.txt = choice leads to page0
+testfiles-step1/page998.txt = found empty line in choices section
+testfiles-step1/page999.txt = found empty line b/w WIN/LOSE and #-line
+
+#success
+story1/page1.txt = choice
+story1/page5.txt = choice
+story1/page6.txt = LOSE
+story1/page8.txt = WIN
+
+
+---------------------cyoa-step2------------------------
+#error
+/usr/local/ece551/cyoa/broken1 = don't have page1
+/usr/local/ece551/cyoa/broken2 = choice leads to NON-EXISTING page
+onePageUnreferred/ = it contains a page (other than page 1) that ---- no other pages refer to it
+noWinPageStory/ = don't have any WIN page
+noLosePageStory/ = don't have any LOSE page
+
+#success
+story1/ = dirName has "/" at the end
+story2 = dirName has NO "/" at the end
+
+
+---------------------cyoa-step3------------------------
+
+
+---------------------cyoa-step4------------------------
