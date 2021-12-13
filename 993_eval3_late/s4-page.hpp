@@ -737,8 +737,7 @@ class Story {
   void dfs(size_t currPN,
            std::vector<size_t> & allWinPNs,
            std::vector<size_t> & path,
-           std::vector<std::vector<size_t> > & allPathsToWin,
-           std::vector<bool> & visited) {
+           std::vector<std::vector<size_t> > & allPathsToWin) {
     // WIN page case
     if (contains(allWinPNs, currPN)) {  // if allWinPNs.contains(currPN)
       path.push_back(currPN);
@@ -748,16 +747,15 @@ class Story {
     }
 
     // other cases
-    if (contains(path, currPN)) {
+    if (contains(path, currPN)) {  // if path.contains(currPN)
       return;
     }
     else {
-      //visited[currPN - 1] = true;
       path.push_back(currPN);
       std::vector<size_t> choicesPNs = (this->allPages[currPN - 1]).getAllChoicesPNs();
       for (std::vector<size_t>::iterator it = choicesPNs.begin(); it != choicesPNs.end();
            ++it) {  // for i in choicesPNs
-        this->dfs(*it, allWinPNs, path, allPathsToWin, visited);
+        this->dfs(*it, allWinPNs, path, allPathsToWin);
       }
       path.pop_back();
       return;
@@ -768,12 +766,11 @@ class Story {
   std::vector<std::vector<size_t> > findAllCfPathsToWin() {
     /* This func uses DFS to find all cycle-free paths to WIN. */
 
-    std::vector<bool> visited(this->size, false);
     std::vector<size_t> allWinPNs = this->findAllWinPNs();  // find all WIN pages
     std::vector<size_t> path;
     std::vector<std::vector<size_t> > allPathsToWin;
 
-    this->dfs(1, allWinPNs, path, allPathsToWin, visited);
+    this->dfs(1, allWinPNs, path, allPathsToWin);
 
     return allPathsToWin;
   }

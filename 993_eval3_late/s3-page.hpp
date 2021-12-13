@@ -625,8 +625,8 @@ class Story {
     }
   }
 
-  // dfs
-  std::vector<size_t> dfs(size_t startPN) {
+  // bfs - find the shortest path
+  std::vector<size_t> bfs(size_t startPN) {
     // declare visited[] and prevInPathPN[]
     size_t storySize = this->size;
     std::vector<size_t> prevInPathPN(storySize, 0);
@@ -682,7 +682,7 @@ class Story {
   // calcStoryDepth
   std::vector<int> calcStoryDepth() {
     // find paths from page1 to all pages
-    std::vector<size_t> prevInPathPN = this->dfs(1);  // startPN is Page1
+    std::vector<size_t> prevInPathPN = this->bfs(1);  // startPN is Page1
 
     std::vector<int> storyDepth;
     storyDepth.push_back(0);  // for Page1, depth = 0
